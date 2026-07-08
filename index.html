@@ -14,16 +14,17 @@
         .header-bg {
             background: rgba(30, 60, 114, 0.85);
             color: white;
-            padding: 40px 0;
+            padding: 30px 0;
             border-bottom-left-radius: 30px;
             border-bottom-right-radius: 30px;
             backdrop-filter: blur(5px);
+            margin-bottom: 20px;
         }
         .term-card {
             background: rgba(255, 255, 255, 0.9);
             border-radius: 20px;
-            padding: 25px;
-            margin-bottom: 25px;
+            padding: 20px;
+            margin-bottom: 20px;
             box-shadow: 0 8px 32px rgba(0,0,0,0.1);
             backdrop-filter: blur(10px);
             border-top: 6px solid #2a5298;
@@ -31,7 +32,7 @@
         .material-item {
             background: #f8f9fa;
             border-right: 5px solid #28a745;
-            padding: 15px;
+            padding: 12px;
             margin-bottom: 10px;
             border-radius: 10px;
             display: flex;
@@ -44,6 +45,7 @@
             border-radius: 20px;
             padding: 5px 15px;
             text-decoration: none;
+            font-size: 0.85rem;
         }
     </style>
 </head>
@@ -51,34 +53,39 @@
 
     <div class="header-bg text-center">
         <h1>منصة الدفعة الهندسية</h1>
-        <p>المكتبة الرقمية - سهلة، سريعة، ومجانية</p>
+        <p>المكتبة الرقمية للمواد الدراسية</p>
     </div>
 
-    <div class="container mt-4">
-        <div class="row">
-            <div class="col-md-6">
-                <div class="term-card">
-                    <h3>📌 الفصل الدراسي الأول</h3>
-                    
-                    <div class="material-item">
-                        <div><strong>رسم هندسي</strong><br><small>شيتات ومحاضرات</small></div>
-                        <a href="#" class="btn btn-download">تحميل PDF</a>
-                    </div>
-
-                    <div class="material-item">
-                        <div><strong>ميكانيكا الموائع</strong><br><small>المحاضرة الأولى</small></div>
-                        <a href="#" class="btn btn-download">تحميل PDF</a>
-                    </div>
-                </div>
+    <div class="container">
+        <div class="term-card">
+            <h3 class="text-center mb-3">📚 مواد الفصل الدراسي</h3>
+            
+            <div class="material-item">
+                <span>حسبان ٢</span>
+                <a href="#" class="btn btn-download">تحميل PDF</a>
             </div>
-
+            <div class="material-item">
+                <span>هندسة تحليلية</span>
+                <a href="#" class="btn btn-download">تحميل PDF</a>
             </div>
+            <div class="material-item">
+                <span>رسم هندسي</span>
+                <a href="#" class="btn btn-download">تحميل PDF</a>
+            </div>
+            <div class="material-item">
+                <span>فيزياء</span>
+                <a href="#" class="btn btn-download">تحميل PDF</a>
+            </div>
+            <div class="material-item">
+                <span>أساسيات الورش</span>
+                <a href="#" class="btn btn-download">تحميل PDF</a>
+            </div>
+        </div>
     </div>
 
-    <footer class="text-center text-white mt-5">
+    <footer class="text-center text-white mt-4">
         <p>صُنع بكل فخر للدفعة الهندسية © 2026</p>
     </footer>
 
 </body>
 </html>
-
