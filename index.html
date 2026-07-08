@@ -2,198 +2,36 @@
 <html lang="ar" dir="rtl">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>منصة الدفعة الهندسية - المواد الدراسية</title>
+    <title>منصة الدفعة الهندسية</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <style>
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            margin: 0;
-            padding: 0;
-            
-            
-            background-image: url('IMG-20251130-WA0012_edit_253406498166039.jpg');
-            background-attachment: fixed; /* جعل الخلفية ثابتة تماماً لا تتحرك مع التمرير */
-            background-size: cover; /* الصورة تغطي كامل أبعاد الشاشة */
-            background-position: center; /* تمركز الصورة في المنتصف */
-            background-repeat: no-repeat;
+            background-image: url('https://images.unsplash.com/photo-1581094288338-2314dddb7eed');
+            background-attachment: fixed;
+            background-size: cover;
+            font-family: sans-serif;
         }
-
-        /* الطبقة الزجاجية للنوافذ (العزل عن الخلفية) */
         .term-card {
-            background: rgba(255, 255, 255, 0.82); /* خلفية بيضاء شفافة جزئياً */
-            border-radius: 16px;
-            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.15);
-            margin-bottom: 25px;
-            padding: 22px;
-            border-top: 6px solid #2a5298;
-            
-            /* تأثير الضباب (Blur) لعزل الكلام عن تفاصيل الصورة الخلفية */
-            backdrop-filter: blur(8px);
-            -webkit-backdrop-filter: blur(8px);
-            
-            /* ⚠️ لضمان عدم تأثير اللمس أو الضغط على الخلفية أثناء التعامل مع النافذة ⚠️ */
-            position: relative;
-            z-index: 2;
-        }
-
-        .header-bg {
-            background: linear-gradient(135deg, rgba(30, 60, 114, 0.85) 0%, rgba(42, 82, 152, 0.85) 100%);
-            color: white;
-            padding: 35px 0;
-            margin-bottom: 35px;
-            border-bottom-left-radius: 24px;
-            border-bottom-right-radius: 24px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
-            backdrop-filter: blur(5px);
-        }
-
-        .term-title {
-            color: #1e3c72;
-            font-weight: bold;
-            margin-bottom: 18px;
-            border-bottom: 2px solid rgba(0, 0, 0, 0.08);
-            padding-bottom: 8px;
-        }
-
-        .material-item {
-            background: rgba(248, 249, 250, 0.9);
-            border-right: 5px solid #28a745;
-            border-radius: 10px;
-            padding: 14px 18px;
-            margin-bottom: 12px;
-            transition: all 0.25s ease;
-        }
-
-        .material-item:hover {
-            transform: translateX(-5px);
-            background: #ffffff;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
-        }
-
-        .btn-download {
-            background-color: #28a745;
-            color: white;
-            border-radius: 20px;
-            font-size: 0.9rem;
-            padding: 6px 18px;
-            text-decoration: none;
-            font-weight: 500;
-        }
-
-        .btn-download:hover {
-            background-color: #218838;
-            color: white;
-        }
-
-        .no-data {
-            color: #666;
-            font-style: italic;
-        }
-
-        footer {
-            background: rgba(255, 255, 255, 0.7);
-            backdrop-filter: blur(5px);
-            border-radius: 10px;
+            background: rgba(255, 255, 255, 0.9);
+            padding: 20px;
+            border-radius: 15px;
+            margin-bottom: 20px;
+            border-top: 5px solid #2a5298;
         }
     </style>
 </head>
 <body>
-
-    <div class="header-bg text-center">
-        <div class="container">
-            <h1 class="fw-bold">منصة المواد والمحاضرات الهندسية</h1>
-            <p class="lead mb-0">المكتبة الرقمية الشاملة لملفات وشيتات الدفعة</p>
+    <div class="container mt-5">
+        <h1 class="text-white text-center mb-4">منصة المواد الهندسية</h1>
+        
+        <div class="term-card">
+            <h3>📌 الفصل الدراسي الأول</h3>
+            <div class="d-flex justify-content-between p-2 border-bottom">
+                <span>رسم هندسي</span>
+                <a href="رابط_الملف_هنا" class="btn btn-success btn-sm">تحميل PDF</a>
+            </div>
         </div>
+        
     </div>
-
-    <div class="container">
-        <div class="row">
-            
-            <div class="col-md-6">
-                <div class="term-card">
-                    <h3 class="term-title"> الفصل الدراسي الأول</h3>
-                    {% if semester_1 %}
-                        {% for material in semester_1 %}
-                        <div class="material-item d-flex justify-content-between align-items-center">
-                            <div>
-                                <strong class="text-dark">{{ material.subject }}</strong>
-                                <div class="text-muted small">{{ material.title }}</div>
-                            </div>
-                            <a href="{{ material.pdf_url }}" target="_blank" class="btn btn-download">تحميل PDF</a>
-                        </div>
-                        {% endfor %}
-                    {% else %}
-                        <p class="no-data">لا توجد مواد مرفوعة حالياً في هذا الترم.</p>
-                    {% endif %}
-                </div>
-            </div>
-
-            <div class="col-md-6">
-                <div class="term-card">
-                    <h3 class="term-title"> الفصل الدراسي الثاني</h3>
-                    {% if semester_2 %}
-                        {% for material in semester_2 %}
-                        <div class="material-item d-flex justify-content-between align-items-center">
-                            <div>
-                                <strong class="text-dark">{{ material.subject }}</strong>
-                                <div class="text-muted small">{{ material.title }}</div>
-                            </div>
-                            <a href="{{ material.pdf_url }}" target="_blank" class="btn btn-download">تحميل PDF</a>
-                        </div>
-                        {% endfor %}
-                    {% else %}
-                        <p class="no-data">لا توجد مواد مرفوعة حالياً في هذا الترم.</p>
-                    {% endif %}
-                </div>
-            </div>
-
-            <div class="col-md-6">
-                <div class="term-card">
-                    <h3 class="term-title"> الفصل الدراسي الثالث</h3>
-                    {% if semester_3 %}
-                        {% for material in semester_3 %}
-                        <div class="material-item d-flex justify-content-between align-items-center">
-                            <div>
-                                <strong class="text-dark">{{ material.subject }}</strong>
-                                <div class="text-muted small">{{ material.title }}</div>
-                            </div>
-                            <a href="{{ material.pdf_url }}" target="_blank" class="btn btn-download">تحميل PDF</a>
-                        </div>
-                        {% endfor %}
-                    {% else %}
-                        <p class="no-data">لا توجد مواد مرفوعة حالياً في هذا الترم.</p>
-                    {% endif %}
-                </div>
-            </div>
-
-            <div class="col-md-6">
-                <div class="term-card">
-                    <h3 class="term-title">الفصل الدراسي الرابع</h3>
-                    {% if semester_4 %}
-                        {% for material in semester_4 %}
-                        <div class="material-item d-flex justify-content-between align-items-center">
-                            <div>
-                                <strong class="text-dark">{{ material.subject }}</strong>
-                                <div class="text-muted small">{{ material.title }}</div>
-                            </div>
-                            <a href="{{ material.pdf_url }}" target="_blank" class="btn btn-download">تحميل PDF</a>
-                        </div>
-                        {% endfor %}
-                    {% else %}
-                        <p class="no-data">لا توجد مواد مرفوعة حالياً في هذا الترم.</p>
-                    {% endif %}
-                </div>
-            </div>
-
-        </div>
-    </div>
-
-    <footer class="text-center py-3 text-muted mt-5 container">
-        <p class="mb-0">صُنع بكل فخر لخدمة الدفعة الهندسية © 2026</p>
-    </footer>
-
 </body>
 </html>
-
-            
