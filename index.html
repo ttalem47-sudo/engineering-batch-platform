@@ -7,71 +7,94 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <style>
         body {
-            background-color: #f4f6f9;
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             margin: 0;
             padding: 0;
+            
+            
             background-image: url('IMG-20251130-WA0012_edit_253406498166039.jpg');
-            background-attachment: fixed; /* الخلفية ثابتة لا تتحرك مع التمرير */
-            background-size: cover; /* الصورة تغطي كامل الشاشة */
-            background-position: center; /* الصورة في منتصف الشاشة */
+            background-attachment: fixed; /* جعل الخلفية ثابتة تماماً لا تتحرك مع التمرير */
+            background-size: cover; /* الصورة تغطي كامل أبعاد الشاشة */
+            background-position: center; /* تمركز الصورة في المنتصف */
+            background-repeat: no-repeat;
         }
-        .container {
-            position: relative; /* لضمان أن النوافذ فوق الخلفية */
-            z-index: 1; /* النوافذ فوق الخلفية */
-        }
-        .header-bg {
-            background: linear-gradient(135deg, rgba(30, 60, 114, 0.9) 0%, rgba(42, 82, 152, 0.9) 100%);
-            color: white;
-            padding: 40px 0;
-            margin-bottom: 30px;
-            border-bottom-left-radius: 20px;
-            border-bottom-right-radius: 20px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
-        }
+
+        /* الطبقة الزجاجية للنوافذ (العزل عن الخلفية) */
         .term-card {
-            background: rgba(255, 255, 255, 0.85); /* خلفية بيضاء معتمة جزئياً */
-            border-radius: 15px;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+            background: rgba(255, 255, 255, 0.82); /* خلفية بيضاء شفافة جزئياً */
+            border-radius: 16px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.15);
             margin-bottom: 25px;
-            padding: 20px;
-            border-top: 5px solid #2a5298;
-            backdrop-filter: blur(5px); /* إضافة تأثير ضبابي (Glassmorphism) */
+            padding: 22px;
+            border-top: 6px solid #2a5298;
+            
+            /* تأثير الضباب (Blur) لعزل الكلام عن تفاصيل الصورة الخلفية */
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+            
+            /* ⚠️ لضمان عدم تأثير اللمس أو الضغط على الخلفية أثناء التعامل مع النافذة ⚠️ */
+            position: relative;
+            z-index: 2;
         }
+
+        .header-bg {
+            background: linear-gradient(135deg, rgba(30, 60, 114, 0.85) 0%, rgba(42, 82, 152, 0.85) 100%);
+            color: white;
+            padding: 35px 0;
+            margin-bottom: 35px;
+            border-bottom-left-radius: 24px;
+            border-bottom-right-radius: 24px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+            backdrop-filter: blur(5px);
+        }
+
         .term-title {
             color: #1e3c72;
             font-weight: bold;
-            margin-bottom: 15px;
-            border-bottom: 2px solid #eee;
+            margin-bottom: 18px;
+            border-bottom: 2px solid rgba(0, 0, 0, 0.08);
             padding-bottom: 8px;
         }
+
         .material-item {
-            background: #f8f9fa;
-            border-right: 4px solid #28a745;
-            border-radius: 8px;
-            padding: 12px 15px;
-            margin-bottom: 10px;
-            transition: all 0.3s ease;
+            background: rgba(248, 249, 250, 0.9);
+            border-right: 5px solid #28a745;
+            border-radius: 10px;
+            padding: 14px 18px;
+            margin-bottom: 12px;
+            transition: all 0.25s ease;
         }
+
         .material-item:hover {
             transform: translateX(-5px);
-            background: #e9ecef;
+            background: #ffffff;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
         }
+
         .btn-download {
             background-color: #28a745;
             color: white;
             border-radius: 20px;
             font-size: 0.9rem;
-            padding: 5px 15px;
+            padding: 6px 18px;
             text-decoration: none;
+            font-weight: 500;
         }
+
         .btn-download:hover {
             background-color: #218838;
             color: white;
         }
+
         .no-data {
-            color: #888;
+            color: #666;
             font-style: italic;
+        }
+
+        footer {
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(5px);
+            border-radius: 10px;
         }
     </style>
 </head>
@@ -89,4 +112,88 @@
             
             <div class="col-md-6">
                 <div class="term-card">
-                    <h3 class="term-title">📌 الفصل الدراسي الأولhttp://googleusercontent.com/generated_image_content/0
+                    <h3 class="term-title"> الفصل الدراسي الأول</h3>
+                    {% if semester_1 %}
+                        {% for material in semester_1 %}
+                        <div class="material-item d-flex justify-content-between align-items-center">
+                            <div>
+                                <strong class="text-dark">{{ material.subject }}</strong>
+                                <div class="text-muted small">{{ material.title }}</div>
+                            </div>
+                            <a href="{{ material.pdf_url }}" target="_blank" class="btn btn-download">تحميل PDF</a>
+                        </div>
+                        {% endfor %}
+                    {% else %}
+                        <p class="no-data">لا توجد مواد مرفوعة حالياً في هذا الترم.</p>
+                    {% endif %}
+                </div>
+            </div>
+
+            <div class="col-md-6">
+                <div class="term-card">
+                    <h3 class="term-title"> الفصل الدراسي الثاني</h3>
+                    {% if semester_2 %}
+                        {% for material in semester_2 %}
+                        <div class="material-item d-flex justify-content-between align-items-center">
+                            <div>
+                                <strong class="text-dark">{{ material.subject }}</strong>
+                                <div class="text-muted small">{{ material.title }}</div>
+                            </div>
+                            <a href="{{ material.pdf_url }}" target="_blank" class="btn btn-download">تحميل PDF</a>
+                        </div>
+                        {% endfor %}
+                    {% else %}
+                        <p class="no-data">لا توجد مواد مرفوعة حالياً في هذا الترم.</p>
+                    {% endif %}
+                </div>
+            </div>
+
+            <div class="col-md-6">
+                <div class="term-card">
+                    <h3 class="term-title"> الفصل الدراسي الثالث</h3>
+                    {% if semester_3 %}
+                        {% for material in semester_3 %}
+                        <div class="material-item d-flex justify-content-between align-items-center">
+                            <div>
+                                <strong class="text-dark">{{ material.subject }}</strong>
+                                <div class="text-muted small">{{ material.title }}</div>
+                            </div>
+                            <a href="{{ material.pdf_url }}" target="_blank" class="btn btn-download">تحميل PDF</a>
+                        </div>
+                        {% endfor %}
+                    {% else %}
+                        <p class="no-data">لا توجد مواد مرفوعة حالياً في هذا الترم.</p>
+                    {% endif %}
+                </div>
+            </div>
+
+            <div class="col-md-6">
+                <div class="term-card">
+                    <h3 class="term-title">الفصل الدراسي الرابع</h3>
+                    {% if semester_4 %}
+                        {% for material in semester_4 %}
+                        <div class="material-item d-flex justify-content-between align-items-center">
+                            <div>
+                                <strong class="text-dark">{{ material.subject }}</strong>
+                                <div class="text-muted small">{{ material.title }}</div>
+                            </div>
+                            <a href="{{ material.pdf_url }}" target="_blank" class="btn btn-download">تحميل PDF</a>
+                        </div>
+                        {% endfor %}
+                    {% else %}
+                        <p class="no-data">لا توجد مواد مرفوعة حالياً في هذا الترم.</p>
+                    {% endif %}
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <footer class="text-center py-3 text-muted mt-5 container">
+        <p class="mb-0">صُنع بكل فخر لخدمة الدفعة الهندسية © 2026</p>
+    </footer>
+
+</body>
+</html>
+
+            
